@@ -29,3 +29,19 @@ void bubblesort(T A[], unsigned int len)
 		}
 	}
 }
+
+template <typename T>
+void bubblesortA(T A[], unsigned int len)
+{
+	bool sorted = false; //整体排序标志位，false表示尚未排序
+	while (!sorted) { //在尚未确认已全局排序之前，逐趟进行扫描交换
+		sorted = true; //假定已经排序
+		for (int i = 1; i < n; i++) { //自左向右逐对检查当前范围A[0, n)内的各相邻元素
+			if (A[i - 1] > A[i]) { //一旦A[i - 1]与A[i]逆序，则交换
+				swap(A[i - 1], A[i]); 
+				sorted = false; //设置未排序标志位
+			}
+		}
+		n--; //就位一个元素
+	}
+}

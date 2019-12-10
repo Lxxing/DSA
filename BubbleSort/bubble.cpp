@@ -5,7 +5,7 @@ void bubblesort ( int A[], int len )
 	//int legth = sizeof(A) / sizeof(a[1]);这儿的A是个指针，计算结果为1
 	for (size_t i = len; i > 0; i--)//等价于while(len--).遍历的个数
 	{
-		for (size_t j = 1; j < i; j++)//A[0,i),利用数组的最右端的边界i
+		for (size_t j = 1; j < i; j++)//A[0,i),利用数组的最右端的边界i。其实也可以直接用最右边的边界，但是这样会增加复杂度
 		{
 			if (A[j - 1] > A[j])
 			{
