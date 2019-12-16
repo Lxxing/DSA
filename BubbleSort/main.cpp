@@ -19,6 +19,7 @@ void main ( int argc, char* argv[] ) {
 
    bubblesort(a, legth);
    bubblesort<int>(a,legth);
+   bubblesortA<int>(a,legth);
    for (size_t i = 0; i < 10; i++)
    {
 	   std::cout << a[i] << "\t";
