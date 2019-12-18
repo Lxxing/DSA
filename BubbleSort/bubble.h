@@ -19,8 +19,8 @@ void bubblesort(T A[], unsigned int len)
     //这是先把小的数排到前面的方法。跟前面的方法相反
 	//主要在于，第二个循环，如果是从后面开始遍历
 	for (unsigned int i = 1; i <= len; i++)
-	{
-		for (unsigned int j = len; j > i; j-- )
+	{//bugfix:下表的取值最大是len -1
+		for (unsigned int j = len - 1; j > i - 1; j-- )
 		{
 			if (A[j - 1] > A[j])
 			{

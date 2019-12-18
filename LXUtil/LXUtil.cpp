@@ -10,12 +10,16 @@ using namespace std;
 
 namespace LXUtil
 {
-	void shuffle(int A[], int n) { //将A[0, n)随机打乱
+	void shuffle(int A[], int n) 
+	{ 
 		while (1 < n)
-			swap(A[rand() % n], A[--n]);
+		{
+			int tmp = rand() % n;
+			swap(A[tmp], A[--n]);
+		}
 	}
 
-	void shuffle(int A[], int lo, int hi) //将A[lo, hi)随机打乱
+	void shuffle(int A[], int lo, int hi) 
 	{
 		shuffle(A + lo, hi - lo);
 	}
@@ -26,7 +30,7 @@ namespace LXUtil
 		for (int i = 0; i < lo; i++) printf("   .");
 		for (int i = lo; i < hi; i++) printf("%4d", A[i]);
 		for (int i = hi; i < n; i++) printf("   .");
-		printf("\n");
+		cout << endl;
 	}
 
 	void print(int A[], int n) { print(A, n, 0, n); }

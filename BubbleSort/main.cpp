@@ -37,20 +37,20 @@ void main ( int argc, char* argv[] )
 	std::cout << "==>  ";
 	print(A, n);
     
-	std::cout << "Bubblesort algorithm A " << std::endl;
-	shuffle(A, n);
-	std::cout << "-->  "; 
-	print(A, n);
-    bubblesort<int>(A, n);
-	std::cout << "==>  ";
-	print(A, n);
-
 	std::cout << "Bubblesort algorithm bubblesortA " << std::endl;
 	shuffle(A, n);
 	std::cout << "-->  "; 
 	print(A, n);
 	bubblesortA<int>(A, n);
 	std::cout << "==>  "; 
+	print(A, n);
+
+	std::cout << "Bubblesort algorithm A " << std::endl;
+	shuffle(A, n);
+	std::cout << "-->  ";
+	print(A, n);
+	bubblesort<int>(A, n);
+	std::cout << "==>  ";
 	print(A, n);
 
 	free(A);
