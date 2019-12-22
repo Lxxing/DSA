@@ -19,6 +19,23 @@ int sum(int A[], int len)
 
 }
 
+int sumRecursive(int A[],int len)
+{
+
+	int ret = 0;
+
+	//µİ¹é»ù£¬
+	if(len = 0)
+	{
+		return A[0];
+	}
+	/*ret = A[len - 1];
+	ret += sumRecursive(A,len - 1);
+	return ret;*/
+
+	return sumRecursive(A,len - 1) + A[len - 1];
+
+}
 
 
 int main()
@@ -32,7 +49,11 @@ int main()
     print(A, n);
 	//0 + 1 + ... + n=n*(n-1)/2 
     int s = sum(A, n); 
-	std::cout << "==>  " << s << std::endl;
+	std::cout << "µü´ú°æ±¾:  " << s << std::endl;
+
+    s = sumRecursive(A, n); 
+	std::cout << "µİ¹é°æ±¾:  " << s << std::endl;
+	
 
 	free(A);
 
