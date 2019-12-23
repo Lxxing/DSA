@@ -11,14 +11,14 @@ struct ListNode
 	ListNodePtr pred;	//Ç°Çýprediction
 	ListNodePtr succ;	//ºó¼Ì
 
-	ListNode() {};
-	~ListNode() {};
+	ListNode();
+	~ListNode();
 
 	
 	
 
 };
 
-
+#include "ListNodeImplementation.h"
 
 #endif //__LISTNODE__H_
