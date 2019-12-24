@@ -4,8 +4,10 @@
 * github:https://github.com/Lxxing?tab=repositories
 * 欢迎交流指正
 ******************************************************************************************/
+#ifndef __X_LXUTIL__H_
+#define __X_LXUTIL__H_
+	
 
-#pragma once
 
 namespace LXUtil
 {
@@ -15,3 +17,6 @@ namespace LXUtil
 	void print(int A[], int n, int lo, int hi); //输出整数数组区间A[lo, hi)
 	void randomArray(int A[], int n, int seed);
 }
+
+#endif //__X_LXUTIL__H_
+
