@@ -3,16 +3,24 @@
 
 
 template <typename T>
-ListNode::ListNode()
+ListNode<T>::ListNode()
 {
 	this->data = NULL;
 	this->pred = NULL;
 	this->succ = NULL;
 }
 
+template <typename T>
+ListNode<T>::ListNode(const T &e)
+{
+	this->data = e;
+	this->pred = NULL;
+	this->succ = NULL;
+}
+
 
 template <typename T>
-ListNode::~ListNode()
+ListNode<T>::~ListNode()
 {
 	this->data = NULL;
 	this->pred = NULL;

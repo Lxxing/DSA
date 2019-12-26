@@ -21,14 +21,14 @@ public:
 	ListNodePtr find(T const & e) const;    //无序链表查找
 	ListNodePtr find(T const &e, int n, ListNodePtr p) const;    //无序链表区间查找
 	ListNodePtr search(T const & e) const;   //有序查找
-	ListNodePtr search(T const &e,int n,ListNodePtr p) cosnt;//有序区间查找
+	ListNodePtr search(T const &e,int n,ListNodePtr p) const;//有序区间查找
 	ListNodePtr selectMax(ListNodePtr p,int n) const;    //p节点后的n-1个后继中最大
 	ListNodePtr selectMax() const;    //整个链表最大
 
-	ListNodePtr insertAsFirst(T cosnt &e);//e作为首节点插入
-	ListNodePtr insertAsLast(T cosnt &e);//e作为尾节点插入
-	ListNodePtr insertBefore(ListNodePtr p,T cosnt &e);//e作为p前驱插入
-	ListNodePtr insertAfter(ListNodePtr p,T cosnt &e);//e作为p后继插入
+	ListNodePtr insertAsFirst(T const &e);//e作为首节点插入
+	ListNodePtr insertAsLast(T const &e);//e作为尾节点插入
+	ListNodePtr insertBefore(ListNodePtr p,T const &e);//e作为p前驱插入
+	ListNodePtr insertAfter(ListNodePtr p,T const &e);//e作为p后继插入
 	T remove(ListNodePtr p);//删除节点p，返回删除节点
 	void merge(List<T> &l);//全列表归并
 	void sort(ListNodePtr p,int n);//列表区间排序
@@ -41,6 +41,8 @@ public:
 	void tranvers(void (*) (T&));
 	template <typename VST>
 	void tranvers(VST& vst);//遍历
+protected:
+	void merge ( ListNodePtr&, int, List<T>&, ListNodePtr, int ); //归并
 
 private:
 	ListNodePtr _header;

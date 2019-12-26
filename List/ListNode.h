@@ -12,6 +12,7 @@ struct ListNode
 	ListNodePtr succ;	//ºó¼Ì
 
 	ListNode();
+	ListNode(const T &e);
 	~ListNode();
 
 	

@@ -147,7 +147,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\List\List.h" />
+    <ClInclude Include="..\..\..\List\ListImplementation.h" />
     <ClInclude Include="..\..\..\List\ListNode.h" />
+    <ClInclude Include="..\..\..\List\ListNodeImplementation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\List\ListTest.cpp" />
