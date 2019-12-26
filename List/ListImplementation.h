@@ -1,6 +1,23 @@
 #ifndef _X_LISTIMPLEMENTION__H_
 #define _X_LISTIMPLEMENTION__H_
 
+template <typename T>
+List<T>::List()
+{
+	_header = new ListNode<T>();
+	_tailer = new ListNode<T>();
+	_header->succ = _tailer;
+	_tailer->pred = _header;
+	_size = 0;
+}
+
+template <typename T>
+List<T>::~List()
+{
+	delete _header;
+	delete _tailer;
+}
+
 
 template <typename T>
 Rank List<T>::size() const
@@ -16,27 +33,27 @@ bool List<T>::empty() const
 }
 
 template <typename T>
-T& List<T>::operator [] (Rank r) const
+T& List<T>::operator [] (Rank r) const	//0 <= r < _size
 {
-	ListNodePtr header = _header;
-	while (r--)
+	ListNodePtr pCur = first();//小标�?开始，对应的实际数据应该从第一个节点开�?
+	while (r--)//r�?，返回首节点，r>0时，循环r次，指向第r个数�?
 	{
-		header = header->succ;
+		pCur = pCur->succ;
 	}
-	return *header;
+	return pCur->data;
 }
 
 
 template <typename T>
 ListNodePtr List<T>::first () const
 {
-	return _header;
+	return _header->succ;
 }
 
 template <typename T>
 ListNodePtr List<T>::last () const
 {
-	return _tailer;
+	return _tailer->pred;
 }
 
 template <typename T>
@@ -130,30 +147,33 @@ ListNodePtr List<T>::selectMax(ListNodePtr p,int n) const
 template <typename T>
 ListNodePtr List<T>::insertAsFirst(T const &e)
 {
-	ListNodePtr *node = new ListNode(e);
+	ListNodePtr node = new ListNode<T>(e);
 	node->succ = _header->succ;
 	_header->succ->pred = node;
 	_header->succ = node;
+	_size++;
 	return node;
 }
 
 template <typename T>
 ListNodePtr List<T>::insertAsLast(T const &e)
 {
-	ListNodePtr *node = new ListNode(e);
+	ListNodePtr node = new ListNode<T>(e);
 	node->succ = _tailer;
 	_tailer->pred->succ = node;
 	_tailer->pred = node;
+	_size++;
 	return node;
 }
 
 template <typename T>
 ListNodePtr List<T>::insertBefore(ListNodePtr p,T const &e)
 {
-	ListNodePtr *node = new ListNode(e);
+	ListNodePtr node = new ListNode<T>(e);
 	node->succ = p;
 	p->pred->succ = node;
 	p->pred = node;
+	_size++;
 	return node;
 
 }
@@ -161,11 +181,12 @@ ListNodePtr List<T>::insertBefore(ListNodePtr p,T const &e)
 template <typename T>
 ListNodePtr List<T>::insertAfter(ListNodePtr p,T const &e)
 {
-	ListNodePtr *node = new ListNode(e);
+	ListNodePtr node = new ListNode<T>(e);
 	node->succ = p->succ;
+	node->pred = p;
 	p->succ->pred = node;
 	p->succ = node;
-	
+	_size++;
 	return node;
 }
 
@@ -175,7 +196,7 @@ T List<T>::remove(ListNodePtr p)
 	ListNodePtr rnt = p;
 	p->succ->pred = p->pred;
 	p->pred->succ = p->succ;
-	
+	_size--;
 	return rnt->data;
 }
 
@@ -191,6 +212,31 @@ template <typename T>
 void List<T>::merge(List<T> &l)
 {
 	merge(_header, _size, l, l.first(), l.size());
+}
+
+template <typename T>
+void List<T>::sort(ListNodePtr p,int n)
+{
+	selectionSort(p,n);
+}
+
+template <typename T>
+void List<T>::sort()
+{
+	sort(_header,_size);
+}
+
+template <typename T>
+void List<T>::selectionSort ( ListNodePtr p, int n )
+{
+	while (n)
+	{
+		ListNodePtr maxpnode = selectMax(p, n);
+		T maxdata = remove(maxpnode);
+		insertBefore(p->succ,maxdata);
+		n--;
+	}
+
 }
 
 

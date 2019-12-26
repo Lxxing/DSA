@@ -8,8 +8,8 @@ template <typename T>
 class List
 {
 public:
-	List() {};
-	~List() {};
+	List();
+	~List();
 
 	Rank size() const;//整体规模
 	bool empty() const;//空判断
@@ -43,7 +43,7 @@ public:
 	void tranvers(VST& vst);//遍历
 protected:
 	void merge ( ListNodePtr&, int, List<T>&, ListNodePtr, int ); //归并
-
+	void selectionSort ( ListNodePtr p, int n );		//选择排序，从p开始的n个节点
 private:
 	ListNodePtr _header;
 	ListNodePtr _tailer;
