@@ -1,11 +1,16 @@
 #include <iostream>
 using namespace std;
+#include <string>
 
 #include "List.h"
 
 template <typename T>
-void Print(List<T> const &e)
+void Print(List<T> const &e,string predstr = "List")
 {
+	if (!predstr.empty())
+	{
+		cout << predstr << ":" ;
+	}
 	for (int i = 0; i < e.size(); ++i)
 	{
 		cout << e[i] << ", ";
@@ -29,10 +34,15 @@ int main()
 	Print(lst);
 	lst.insertAfter(lst.first(), 2);//4,2,1,3,0
 	Print(lst);
-	lst.insertBefore(lst.last(), 9);//4,2,1,3,0,9
+	lst.insertBefore(lst.last(), 9);//4,2,1,3,9£¬0,
 	Print(lst);
-	lst.insertBefore(lst.last(), 8);//4,2,1,3,00,9,8
+	lst.insertBefore(lst.last(), 8);//4,2,1,3,9,8£¬0,
 	Print(lst);
-
-
+	ListNodeTPtr(int) max = lst.selectMax();
+	cout << "max:" << max->data << endl;//9
+	int rm = lst.remove(max);
+	lst.insertAsLast(rm);//4,2,1,3,8,0,9
+	Print(lst);
+	lst.sort();
+	Print(lst);		//
 }

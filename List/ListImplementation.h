@@ -7,7 +7,9 @@ List<T>::List()
 	_header = new ListNode<T>();
 	_tailer = new ListNode<T>();
 	_header->succ = _tailer;
+	_header->pred = NULL;
 	_tailer->pred = _header;
+	_tailer->succ = NULL;
 	_size = 0;
 }
 
@@ -149,6 +151,7 @@ ListNodePtr List<T>::insertAsFirst(T const &e)
 {
 	ListNodePtr node = new ListNode<T>(e);
 	node->succ = _header->succ;
+	node->pred = _header;
 	_header->succ->pred = node;
 	_header->succ = node;
 	_size++;
@@ -160,6 +163,7 @@ ListNodePtr List<T>::insertAsLast(T const &e)
 {
 	ListNodePtr node = new ListNode<T>(e);
 	node->succ = _tailer;
+	node->pred = _tailer->pred;
 	_tailer->pred->succ = node;
 	_tailer->pred = node;
 	_size++;
@@ -167,10 +171,11 @@ ListNodePtr List<T>::insertAsLast(T const &e)
 }
 
 template <typename T>
-ListNodePtr List<T>::insertBefore(ListNodePtr p,T const &e)
+ListNodePtr List<T>::insertBefore(ListNodePtr p,T const &e)
 {
 	ListNodePtr node = new ListNode<T>(e);
 	node->succ = p;
+	node->pred = p->pred;
 	p->pred->succ = node;
 	p->pred = node;
 	_size++;
@@ -190,14 +195,21 @@ ListNodePtr List<T>::insertAfter(ListNodePtr p,T const &e)
 	return node;
 }
 
-template <typename T>
-T List<T>::remove(ListNodePtr p)
+template <typename T>//删除节点p,返回节点数据
+T List<T>::remove(ListNodeTPtr(T) p)
 {
-	ListNodePtr rnt = p;
+	//如果上层都赋值有效的节点，此处不需要判断头尾节点
+	if (p == _header || p == _tailer)
+	{
+		return -1;
+	}
+	T rnt = p->data;//备份删除节点数值，（T类型必须重载=操作符）
 	p->succ->pred = p->pred;
 	p->pred->succ = p->succ;
-	_size--;
-	return rnt->data;
+	delete p;//释放
+	_size--;//计数
+	
+	return rnt;
 }
 
 template <typename T>
@@ -223,17 +235,25 @@ void List<T>::sort(ListNodePtr p,int n)
 template <typename T>
 void List<T>::sort()
 {
-	sort(_header,_size);
+	sort(first(),_size);
 }
 
+//列表的选择排序算法：从p开始的n个元素排序
 template <typename T>
 void List<T>::selectionSort ( ListNodePtr p, int n )
 {
+	ListNodePtr pBar = p;
+	for (int i = 0; i < n; ++i)
+	{
+		pBar = pBar->succ;
+	}
+
 	while (n)
 	{
 		ListNodePtr maxpnode = selectMax(p, n);
 		T maxdata = remove(maxpnode);
-		insertBefore(p->succ,maxdata);
+		insertBefore(pBar,maxdata);
+		pBar = pBar->pred;
 		n--;
 	}
 
