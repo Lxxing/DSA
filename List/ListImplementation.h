@@ -134,14 +134,16 @@ template <typename T>
 ListNodePtr List<T>::selectMax(ListNodePtr p,int n) const
 {
 	ListNodePtr pCur = p;
-	ListNodePtr pMax = p;
-	while (n--)
+	ListNodePtr pMax = p;//将当前节点定为最大节点
+	while (n > 1)
 	{
+		pCur = pCur->succ;//也可以放在if判断之后，但是多了依次跟自己比较.n>1不包含本身
 		if (pMax->data < pCur->data)
 		{
 			pMax = pCur;
 		}
-		pCur = pCur->succ;
+
+		n--;
 	}
 	return pMax;
 }
@@ -238,21 +240,21 @@ void List<T>::sort()
 	sort(first(),_size);
 }
 
-//列表的选择排序算法：从p开始的n个元素排序
+//列表的选择排序算法：从p开始的n个元素排序(valid(p)&&rank(p)+n<_size)
 template <typename T>
 void List<T>::selectionSort ( ListNodePtr p, int n )
 {
-	ListNodePtr pBar = p;
+	ListNodePtr pBar = p;//有序区间标志
 	for (int i = 0; i < n; ++i)
 	{
 		pBar = pBar->succ;
-	}
+	}//有序区间置空
 
-	while (n)
+	while (n > 1)//至少两个有效数据
 	{
 		ListNodePtr maxpnode = selectMax(p, n);
-		T maxdata = remove(maxpnode);
-		insertBefore(pBar,maxdata);
+		T maxdata = remove(maxpnode);//从无序区间删除
+		insertBefore(pBar,maxdata);//添加到有序区间
 		pBar = pBar->pred;
 		n--;
 	}
