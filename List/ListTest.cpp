@@ -18,6 +18,11 @@ void Print(List<T> const &e,string predstr = "List")
 	cout << endl;
 
 }
+
+void PrintData(int & data)
+{
+	cout << data << ", ";
+}
 int main()
 {
 
@@ -48,9 +53,23 @@ int main()
 	ListNodeTPtr(int) nd3 = lst.find(3);
 	lst.insertBefore(nd3, 3);//4,4,2,1,3,3,8,0,9,9
 	Print(lst);
+
+	List<int> lstpre(lst);
+	Print(lstpre, "lstpre:");
+	lstpre.deduplicate();
+	Print(lstpre,"lstpre deduplicate:");//4, 2, 1, 3, 8, 0, 9
+
 	lst.sort();//0,1,2,3,3,4,4,8,9,9
 	Print(lst);		
-	lst.deduplicate();
-	Print(lst);//0,1,2,3,4,8,9
+	lst.uniqufy();
+	Print(lst, "lst uniqufy:");
+	
+	ListNodeTPtr(int) snd4 = lst.search(4);
+	lst.insertAfter(snd4,4);
+	ListNodeTPtr(int) snd8 = lst.search(8);
+	lst.insertAfter(snd8, 8);
+	ListNodeTPtr(int) snd3 = lst.search(3);
+	Print(lst);
+	lst.tranvers(PrintData);
 
 }

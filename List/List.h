@@ -9,6 +9,7 @@ class List
 {
 public:
 	List();
+	List ( List<T> const& L ); //整体复制列表L
 	~List();
 
 	Rank size() const;//整体规模
@@ -16,6 +17,7 @@ public:
 	T& operator [] (Rank r) const;//寻秩访问，O(n)
 	ListNodePtr first() const; //首节点
 	ListNodePtr last() const;    //尾结点
+	int clear(); //清除所有节点,不包括头尾
 	bool valid(ListNodePtr p) const;	//节点是否有效
 	int disordered() const;     //判断列表是否有序
 	ListNodePtr find(T const & e) const;    //无序链表查找
@@ -42,6 +44,7 @@ public:
 	template <typename VST>
 	void tranvers(VST& vst);//遍历
 protected:
+	void init();//初始化头尾节点
 	void merge ( ListNodePtr&, int, List<T>&, ListNodePtr, int ); //归并
 	void mergeSort ( ListNodePtr &, int ); //归并排序,从p开始的n个节点
 	void selectionSort ( ListNodePtr p, int n );//选择排序，从p开始的n个节点

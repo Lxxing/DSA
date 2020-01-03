@@ -2,7 +2,7 @@
 #define _X_LISTIMPLEMENTION__H_
 
 template <typename T>
-List<T>::List()
+void List<T>::init()
 {
 	_header = new ListNode<T>();
 	_tailer = new ListNode<T>();
@@ -14,12 +14,42 @@ List<T>::List()
 }
 
 template <typename T>
+List<T>::List()
+{
+	init();
+}
+
+template <typename T>
+List<T>::List ( List<T> const& L )
+{
+	init();
+
+	ListNodePtr pCur = L.first()->pred;	
+	for (int i = 0; i < L.size(); i++)
+	{
+		pCur = pCur->succ;
+		insertAsLast(pCur->data);
+	}
+}
+
+template <typename T>
 List<T>::~List()
 {
+	clear();
 	delete _header;
 	delete _tailer;
 }
 
+template <typename T>
+int List<T>::clear()
+{
+	int origSize = _size;
+	while (_size > 0)
+	{
+		remove(_header->succ);
+	}
+	return origSize;//返回列表原始个数
+}
 
 template <typename T>
 Rank List<T>::size() const
@@ -107,20 +137,21 @@ ListNodePtr List<T>::find(T const &e, int n, ListNodePtr p) const
 template <typename T>
 ListNodePtr List<T>::search(T const & e) const
 {
-	search(e, _size, _header);
+	return search(e, _size, _tailer);
 }
 
-template <typename T>
+template <typename T>//有序列表内节点p的n个（真）前驱中，找到不大于e的最后者
 ListNodePtr List<T>::search(T const &e,int n,ListNodePtr p) const
 {
 	ListNodePtr pCur = p;
-	while (n--)
+	while (n-- >= 0)
 	{
-		if (e <= pCur->data)
+		pCur = pCur->pred;
+		if (e >= pCur->data)
 		{
 			return pCur;
 		}
-		pCur = pCur->succ;
+		
 	}
 	return NULL;
 }
@@ -232,13 +263,15 @@ void List<T>::merge(List<T> &l)
 template <typename T>
 void List<T>::sort(ListNodePtr p,int n)
 {
-	switch (rand()%3)
+	//int casen = rand()%3;
+	int casen = 2;
+	switch (casen)
 	{
 		case 1:
 			selectionSort(p,n);
 			break;
 		case 2:
-			//insertionSort(p,n);
+			insertionSort(p,n);
 			break;
 		case 3:
 			//mergeSort(p,n);
@@ -279,10 +312,10 @@ void List<T>::selectionSort ( ListNodePtr p, int n )
 template <typename T> //valid(p)&&rank(p)+n<_size
 void List<T>::insertionSort (ListNodePtr p, int n ) 
 { 
-   for ( int r = 0; r < n; r++ ) 
+   for ( int r = 0; r < n; r++ ) //r也是有序序列的计数
    {
    	  ListNodePtr nd = search(p->data, r, p );//查找位置节点
-      insertBefore( nd, p->data ); //插入位置节点
+      insertAfter( nd, p->data ); //插入位置节点
       p = p->succ; //转向下一节点
       remove ( p->pred );//
    }
@@ -317,6 +350,33 @@ int List<T>::deduplicate()
 		num++;//下一个位置查找
 	}
 	return oldsize - rmsize;
+}
+
+template <typename T>//删除重复元素，返回删除元素个数
+int List<T>::uniqufy()
+{
+	ListNodePtr pHead = _header;
+	int oldsize = _size;//记录原始规模
+
+	while (_tailer != pHead->succ)//遍历到尾节点
+	{
+		pHead = pHead->succ;
+		if (pHead->data == pHead->succ->data)
+		{
+			remove(pHead->succ);
+		}
+	}
+	return oldsize - _size;
+
+}
+
+template <typename T>
+void List<T>::tranvers(void (* usrVisit) (T&))
+{
+	for (ListNodePtr pCur = first(); pCur != _tailer; pCur = pCur->succ)
+	{
+		usrVisit(pCur->data);
+	}
 }
 
 
