@@ -85,20 +85,21 @@ int List<T>::disordered() const
 template <typename T>
 ListNodePtr List<T>::find(T const & e) const
 {
-	return find(e,_size,_header);
+	return find(e,_size,_tailer);
 }
 
-template <typename T>
+template <typename T>//无序列表内节点p的n个（真）前驱中，找到等于e的最后者
 ListNodePtr List<T>::find(T const &e, int n, ListNodePtr p) const
 {
 	ListNodePtr pCur = p;
-	while (n--)
+	while (n-- >= 0)//从第0位开始
 	{
+		pCur = pCur->pred;
 		if (e == pCur->data)
 		{
 			return pCur;
 		}
-		pCur = pCur->succ;
+		
 	}
 	return NULL;
 }
@@ -130,7 +131,7 @@ ListNodePtr List<T>::selectMax() const
 	return selectMax(_header,_size);
 }
 
-template <typename T>
+template <typename T>//p开始的n个节点
 ListNodePtr List<T>::selectMax(ListNodePtr p,int n) const
 {
 	ListNodePtr pCur = p;
@@ -231,7 +232,20 @@ void List<T>::merge(List<T> &l)
 template <typename T>
 void List<T>::sort(ListNodePtr p,int n)
 {
-	selectionSort(p,n);
+	switch (rand()%3)
+	{
+		case 1:
+			selectionSort(p,n);
+			break;
+		case 2:
+			//insertionSort(p,n);
+			break;
+		case 3:
+			//mergeSort(p,n);
+			break;
+			
+	}
+	
 }
 
 template <typename T>
@@ -244,21 +258,65 @@ void List<T>::sort()
 template <typename T>
 void List<T>::selectionSort ( ListNodePtr p, int n )
 {
-	ListNodePtr pBar = p;//有序区间标志
+	ListNodePtr pHead = p->pred;//必须保存头指针，不然调用selectmax，会有可能把当前指针删除掉
+	ListNodePtr pBar = p;//有序区间标志，首节点
 	for (int i = 0; i < n; ++i)
 	{
 		pBar = pBar->succ;
-	}//有序区间置空
+	}//有序区间置空,待排序空间为(pHead,pBar)
 
 	while (n > 1)//至少两个有效数据
 	{
-		ListNodePtr maxpnode = selectMax(p, n);
+		ListNodePtr maxpnode = selectMax(pHead->succ, n);//第一个参数要用pHead的下一个节点
 		T maxdata = remove(maxpnode);//从无序区间删除
-		insertBefore(pBar,maxdata);//添加到有序区间
-		pBar = pBar->pred;
+		insertBefore(pBar,maxdata);//添加到有序区间，并作为首节点
+		pBar = pBar->pred;//移动有序区间首节点位置
 		n--;
 	}
 
+}
+
+template <typename T> //valid(p)&&rank(p)+n<_size
+void List<T>::insertionSort (ListNodePtr p, int n ) 
+{ 
+   for ( int r = 0; r < n; r++ ) 
+   {
+   	  ListNodePtr nd = search(p->data, r, p );//查找位置节点
+      insertBefore( nd, p->data ); //插入位置节点
+      p = p->succ; //转向下一节点
+      remove ( p->pred );//
+   }
+}
+
+template <typename T> //valid(p)&&rank(p)+n<_size
+void mergeSort ( ListNodePtr& p, int n)
+{
+
+	return;
+}
+
+template <typename T>//删除重复元素，返回删除元素个数
+int List<T>::deduplicate()
+{
+	ListNodePtr pHead = _header;
+	ListNodePtr pBar = _tailer;
+	int oldsize = _size;//记录原始规模
+	int rmsize = 0;//记录删除的个数
+	int num = 0;//记录有序序列的个数
+
+	while (_tailer != pHead->succ)//遍历到尾节点
+	{
+		pHead = pHead->succ;
+		ListNodePtr nd = find(pHead->data, num, pHead);//查找数据位置
+		if (NULL != nd)
+		{
+			T rm = remove(nd);//删除重复
+			rmsize++;//记录重复个数
+			continue;
+		}
+		num++;//下一个位置查找
+	}
+	return oldsize - rmsize;
 }
 
 

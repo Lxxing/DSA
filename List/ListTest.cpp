@@ -42,7 +42,15 @@ int main()
 	cout << "max:" << max->data << endl;//9
 	int rm = lst.remove(max);
 	lst.insertAsLast(rm);//4,2,1,3,8,0,9
+	lst.insertAsLast(rm);//4,2,1,3,8,0,9,9
 	Print(lst);
-	lst.sort();
-	Print(lst);		//
+	lst.insertAfter(lst.first(), 4);//4,4,2,1,3,8,0,9,9
+	ListNodeTPtr(int) nd3 = lst.find(3);
+	lst.insertBefore(nd3, 3);//4,4,2,1,3,3,8,0,9,9
+	Print(lst);
+	lst.sort();//0,1,2,3,3,4,4,8,9,9
+	Print(lst);		
+	lst.deduplicate();
+	Print(lst);//0,1,2,3,4,8,9
+
 }
