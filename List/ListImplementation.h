@@ -321,10 +321,25 @@ void List<T>::insertionSort (ListNodePtr p, int n )
    }
 }
 
-template <typename T> //valid(p)&&rank(p)+n<_size
+template <typename T> //valid(p)&&rank(p)+n<_size,归并排序：对起始于位置p的n个元素排序
 void mergeSort ( ListNodePtr& p, int n)
 {
+	if (n <= 1)
+	{
+		return;//递归基础
+	}
 
+	ListNodePtr pother = p;//pother移动到中间
+	int mid = n >> 1;
+	for (int i = 0; i < mid; i++)
+	{
+		pother = pother->succ;
+	}
+
+	mergeSort(p, mid);
+	mergeSort(pother, n - mid);
+	merge(p,mid,this,pother,n - mid);
+	
 	return;
 }
 
@@ -378,6 +393,16 @@ void List<T>::tranvers(void (* usrVisit) (T&))
 		usrVisit(pCur->data);
 	}
 }
+
+template <typename T> template <typename VST> 
+void List<T>::traverse ( VST& usrVisit )
+{  
+	for (ListNodePtr pCur = first(); pCur != _tailer; pCur = pCur->succ)
+	{
+		usrVisit(pCur->data);
+	}
+}
+
 
 
 #endif //_X_LISTIMPLEMENTION__H_
