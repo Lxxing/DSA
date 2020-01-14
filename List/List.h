@@ -45,7 +45,7 @@ public:
 	void tranvers(VST& vst);//遍历
 protected:
 	void init();//初始化头尾节点
-	void merge ( ListNodePtr&, int, List<T>&, ListNodePtr, int ); //归并
+	void merge ( ListNodePtr&, int, List<T>&, ListNodePtr, int ); //有序列表的归并
 	void mergeSort ( ListNodePtr &, int ); //归并排序,从p开始的n个节点
 	void selectionSort ( ListNodePtr p, int n );//选择排序，从p开始的n个节点
 	void insertionSort ( ListNodePtr, int ); //插入排序,对从p开始的n个节点

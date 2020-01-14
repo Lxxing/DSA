@@ -246,25 +246,43 @@ T List<T>::remove(ListNodeTPtr(T) p)
 	return rnt;
 }
 
-template <typename T>
+template <typename T>//当前列表中自self起的selfsize个元素，与列表L中自q起的size个元素归并
 void List<T>::merge(ListNodePtr &self, int selfsize, List<T>&L, ListNodePtr q, int size)
 {
 
+	ListNodePtr pCur = self->pred; //标记归并后区间的起点
+	while ( 0 < size ) //在q尚未移出区间之前
+	{
+      if ( ( 0 < selfsize) && ( self->data <= q->data ) ) //若self仍在区间内且v(self) <= v(q)，则
+      { 
+          self = self->succ;//确定self的新元素区间,self归入合并的列表，并替换为其直接后继
+          if ( q == self ) 
+              break; 
+          selfsize--;
+      } 
+      else //self已超出右界或v(q) < v(self),将q转移至self之前
+      { 
+          q = q->succ;//确定q的新元素区间
+      	  T rmnode = L.remove(q->pred);//从q区间拿出的元素
+      	  insertBefore(self, rmnode);
+      	  size--; 
+      } 
+   	}
 
-
+	self = pCur->succ;
 }
 
 template <typename T>
 void List<T>::merge(List<T> &l)
 {
-	merge(_header, _size, l, l.first(), l.size());
+	merge(first(), _size, l, l.first(), l.size());
 }
 
 template <typename T>
 void List<T>::sort(ListNodePtr p,int n)
 {
 	//int casen = rand()%3;
-	int casen = 2;
+	int casen = 3;
 	switch (casen)
 	{
 		case 1:
@@ -274,9 +292,8 @@ void List<T>::sort(ListNodePtr p,int n)
 			insertionSort(p,n);
 			break;
 		case 3:
-			//mergeSort(p,n);
+			mergeSort(p,n);
 			break;
-			
 	}
 	
 }
@@ -322,7 +339,7 @@ void List<T>::insertionSort (ListNodePtr p, int n )
 }
 
 template <typename T> //valid(p)&&rank(p)+n<_size,归并排序：对起始于位置p的n个元素排序
-void mergeSort ( ListNodePtr& p, int n)
+void List<T>::mergeSort ( ListNodePtr& p, int n)
 {
 	if (n <= 1)
 	{
@@ -338,7 +355,7 @@ void mergeSort ( ListNodePtr& p, int n)
 
 	mergeSort(p, mid);
 	mergeSort(pother, n - mid);
-	merge(p,mid,this,pother,n - mid);
+	merge(p,mid,*this,pother,n - mid);
 	
 	return;
 }
@@ -395,7 +412,7 @@ void List<T>::tranvers(void (* usrVisit) (T&))
 }
 
 template <typename T> template <typename VST> 
-void List<T>::traverse ( VST& usrVisit )
+void List<T>::tranvers ( VST& usrVisit )
 {  
 	for (ListNodePtr pCur = first(); pCur != _tailer; pCur = pCur->succ)
 	{

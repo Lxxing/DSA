@@ -58,7 +58,8 @@ int main()
 	Print(lstpre, "lstpre:");
 	lstpre.deduplicate();
 	Print(lstpre,"lstpre deduplicate:");//4, 2, 1, 3, 8, 0, 9
-
+	lstpre.sort();//0,1,2,3,4,8,9
+	Print(lstpre);
 	lst.sort();//0,1,2,3,3,4,4,8,9,9
 	Print(lst);		
 	lst.uniqufy();
