@@ -11,7 +11,7 @@ int sum(int A[], int len)
 
 	int ret = 0;
 
-	for(unsigned int i = 0; i < len; i++)
+	for(int i = 0; i < len; i++)
 	{
 		ret += A[i];
 	}

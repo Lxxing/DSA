@@ -1,3 +1,10 @@
+/******************************************************************************************
+* Data Structures in C++
+* Auther : luxiang
+* github:https://github.com/Lxxing?tab=repositories
+* 欢迎交流指正
+******************************************************************************************/
+
 #ifndef _X_LISTIMPLEMENTION__H_
 #define _X_LISTIMPLEMENTION__H_
 

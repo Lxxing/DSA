@@ -1,3 +1,10 @@
+/******************************************************************************************
+* Data Structures in C++
+* Auther : luxiang
+* github:https://github.com/Lxxing?tab=repositories
+* 欢迎交流指正
+******************************************************************************************/
+
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
