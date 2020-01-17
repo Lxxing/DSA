@@ -7,19 +7,20 @@
 #include <iostream>
 using namespace std;
 #include <math.h>
-//非负整数计算2的n次幂
+//非负整数计算幂函数2^n
+//O(n) = O(2^r)，r为输入指数n二进制位数，即比特位数
 __int64 power1(int n)
 {
-	__int64 rnt = 1;
+	__int64 rnt = 1;//O(1)
 
-	for (int i = 0; i  < n; i++ )
+	for (int i = 0; i  < n; i++ )//O(n)
 	{
 
-		rnt <<= 1; //rnt *= 2;倍增
+		rnt <<= 1; //rnt *= 2;倍增,//O(1)
 		
 	}
 
-	return rnt;
+	return rnt;//O(1)
 }
 inline __int64 sqr(__int64 n)
 {
