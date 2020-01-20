@@ -19,7 +19,7 @@ int sum(int A[], int len)
 	return ret;
 
 }
-
+//递归：前n - 1项之和，再累计第n - 1项,递归深度n+1
 int sumRecursive(int A[],int len)
 {
 
@@ -30,15 +30,21 @@ int sumRecursive(int A[],int len)
 	{
 		return 0;
 	}
-	/*ret = A[len - 1];
+	/*等效
+	ret = A[len - 1];
 	ret += sumRecursive(A,len - 1);
 	return ret;*/
 
+	/*
+	调用多路递归算法
+	return sumRecursive(A,0,n-1);
+	*/
 	return sumRecursive(A,len - 1) + A[len - 1];
 
 }
 
 
+//O(hi - lo + 1)，线性正比于区间的长度
 int sumRecursive(int A[],int low,int high)
 {
 
