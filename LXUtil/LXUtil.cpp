@@ -42,5 +42,7 @@ namespace LXUtil
 		shuffle(A, 0, n / 3);
 		shuffle(A, 2 * n / 3, n);
 	}
+
+	
 }
 
