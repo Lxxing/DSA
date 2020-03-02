@@ -333,12 +333,12 @@ void vector<T>::merge ( Rank lo, Rank mid, Rank hi )
 
 	while (( prePointer < preLength ) || ( sucPointer < sucLength ))//pre、suc序列有一个没有遍历完
 	{
-		if (( prePointer < preLength ) && //pre有数据，pre数组数据小或者suc编译完毕
+		if (( prePointer < preLength ) && //pre有数据，pre数组数据小或者suc遍历完毕
 			( !(sucPointer < sucLength) || (preHead[prePointer] <= sucArray[sucPointer]) ))
 		{
 			currentArray[currentPointer++] = preHead[prePointer++];
 		}
-		if (( sucPointer < sucLength ) && //suc有数据，suc数组数据小或者pre编译完毕
+		if (( sucPointer < sucLength ) && //suc有数据，suc数组数据小或者pre遍历完毕
 			( !(prePointer < preLength) || (sucArray[sucPointer] < preHead[prePointer]) ))
 		{
 			currentArray[currentPointer++] = sucArray[sucPointer++];

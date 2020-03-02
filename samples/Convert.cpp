@@ -39,7 +39,7 @@ void convertR ( std::stack<char>& S, __int64 n, int base )
 
 }
 
-void main()
+void main1()
 {
 
 	int testnum = 5864;
