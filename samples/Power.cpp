@@ -59,7 +59,7 @@ __int64 power1OP ( int n )
    { 
       if ( n & 1 ) //如果是奇数
          rnt *= p; 
-      n >>= 1; //这两部相当于计算平方
+      n >>= 1; //指数减半
       p *= p;
    }
    return rnt;
