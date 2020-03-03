@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\samples\Convert.cpp" />
     <ClCompile Include="..\..\..\samples\Majority.cpp" />
+    <ClCompile Include="..\..\..\samples\SelectK.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

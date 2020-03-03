@@ -59,13 +59,12 @@ bool Majority(vector<T> &A,int & maj)
 //中位数计算
 
 
-void main()
+void mainM()
 {
 
 	vector<int> A = {5,3,9,3,3,2,3,3};
 	int maj;
 	Majority(A,maj);
 	cout << "Majority:" << maj << endl;
-	vector<int> A = { 6,6,3,3,6,3,3,2,3,3 };
 }
 

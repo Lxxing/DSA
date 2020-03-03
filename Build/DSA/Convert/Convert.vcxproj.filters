@@ -24,5 +24,8 @@
     <ClCompile Include="..\..\..\samples\Majority.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\samples\SelectK.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
