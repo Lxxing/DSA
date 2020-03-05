@@ -59,7 +59,7 @@ bool Majority(vector<T> &A,int & maj)
 //中位数计算
 
 
-void mainM()
+void main()
 {
 
 	vector<int> A = {5,3,9,3,3,2,3,3};
