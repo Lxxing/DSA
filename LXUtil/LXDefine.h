@@ -7,7 +7,7 @@
 
 #ifndef __COMMON_DEFINE__H_
 #define __COMMON_DEFINE__H_
-
+//运算符匹配
 #define N_OPTR 9 //运算符总数
 typedef enum { 
 	ADD = 0, //加
