@@ -24,7 +24,7 @@ public:
                     break;
                 case ')':
                 {
-                	if(solution.empty()) return false;//需要判断单个非法右括号
+                	if(solution.empty()) return false;//需要判断单个非法闭括号
                     char stackTop = solution.top();
 					if (stackTop == '(')
 					{
