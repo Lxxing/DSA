@@ -3,35 +3,30 @@
 * Auther : luxiang
 * github:https://github.com/Lxxing?tab=repositories
 * 欢迎交流指正
-26. 删除排序数组中的重复项
+27. 移除元素
 ******************************************************************************************/
 
 #include "LeetCode.h"
 class Solution {
 public:
-    int removeDuplicates(vector<int>& nums) {
+
+    int removeElement(vector<int>& nums,int val) {
         int length = nums.size();
-		if (length < 2)
+		if (length < 1)
 		{
 			return length;
 		}
-		int duplicate = 0;//没有必要，直接返回头指针即可
         int head = 0;
-        int tailer = 1;
-		for ( ;tailer < length;)
+        int tailer = 0;
+		for ( ;tailer < length;tailer++)//尾指针每次都要走，没必要每次作运算
 		{
-			if (nums[head] == nums[tailer])
+			if (nums[tailer] != val)
 			{
-				 tailer++;//相同数据尾指针走
-				 duplicate++;
-			}
-			else
-			{
-				head++;//头指针的位置数据不能赋值，需要到新数据的位置
-			    nums[head] = nums[tailer++];//赋值两个指针都要走
+				nums[head] = nums[tailer];
+			    head++;
 			}
 		}
-		return length - duplicate;
+		return head;
     }
 };
 
@@ -93,6 +88,7 @@ int main() {
     }
     return 0;
 }
+
 
 
 
