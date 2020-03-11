@@ -40,7 +40,7 @@
    ( IsRoot(x) ? root : ( IsLChild(x) ? (x).parent->lc : (x).parent->rc ) )
 
 template <typename T>
-struct BinTreeNode
+struct BinTreeNodes
 {
 	T data;	//Êý¾Ý
 	BinTreeNodePtr parent;

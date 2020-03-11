@@ -96,7 +96,23 @@ BinTreeNodePtr BinTree<T>::InsertLTree(BinTreeNodePtr node,BinTree<T> *&e)
 template <typename T>//去掉子树的节点，递归释放
 int BinTree<T>::Remove( BinTreeNodePtr node)
 {
-	
+
+	int n = RemoveRecursive(node);
+	size -= n;
+	delete node;
+	return n;
+}
+template <typename T>//去掉子树的节点，递归释放
+int BinTree<T>::RemoveRecursive( BinTreeNodePtr node)
+{
+	//递归基
+	if (NULL == node)
+	{
+		return 0;
+	}
+	node->
+	int rnt = 1 + RemoveRecursive(node->lChild) + RemoveRecursive(node->rChild);
+	return rnt;
 }
 
 template <typename T>
