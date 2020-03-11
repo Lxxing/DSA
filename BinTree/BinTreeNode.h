@@ -18,6 +18,26 @@
  * BinTreeNode状态与性质的判断
  ******************************************************************************************/
 #define HEIGHT(node) ((node) ? (node)->height : -1) //节点高度
+#define IsRoot(node) (!((node).parent ))//root为true，非root为false
+#define HasParent(node) ((node).parent )
+#define HasLChild(node) ( (node).lChild)
+#define HasRChild(node) ( (node).rChild )
+#define HasChild(node) ( HasLChild(node) || HasRChild(node) ) //至少拥有一个孩子
+#define HasBothChild(node) ( HasLChild(node) && HasRChild(node) ) //同时拥有两个孩子
+#define IsLeaf(node) ( !HasChild(node) )//没有孩子为叶节点
+
+
+#define IsLChild(node) \
+	(!IsRoot(node) && ( &(node) == (node).parent->lChild))
+#define IsRChild(node) \
+	(!IsRoot(node) && ( &(node) == (node).parent->rChild))
+
+
+/******************************************************************************************
+ * 与BinNode具有特定关系的节点及指针
+ ******************************************************************************************/
+#define FromParentTo(x) \/*来自父亲的引用*/ 
+   ( IsRoot(x) ? root : ( IsLChild(x) ? (x).parent->lc : (x).parent->rc ) )
 
 template <typename T>
 struct BinTreeNode
@@ -29,8 +49,8 @@ struct BinTreeNode
 	int height;//高度
 
 	BinTreeNode();
-	BinTreeNode(const T &e,BinTreeNodePtr pare);
-	BinTreeNode();	
+	BinTreeNode(T e,BinTreeNodePtr pare = NULL);
+	~BinTreeNode();	
 
 	//ADT
 	int Size();//当前节点子树的规模，当前节点后代总数

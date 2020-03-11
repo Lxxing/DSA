@@ -40,7 +40,7 @@ template <typename T>
 BinTreeNodePtr BinTree<T>::InsertRoot(T const &e)
 {
 	size++;
-	root = new BinTreeNode(e);
+	root = new BinTreeNode<T>(e);
 	return root;
 }
 
@@ -94,7 +94,7 @@ BinTreeNodePtr BinTree<T>::InsertLTree(BinTreeNodePtr node,BinTree<T> *&e)
 }
 
 template <typename T>//去掉子树的节点，递归释放
-int BinTree<T>::Remove( BinTreeNodePtr node);
+int BinTree<T>::Remove( BinTreeNodePtr node)
 {
 	
 }

@@ -15,7 +15,7 @@ class BinTree
 public:
 
 	BinTree();
-	BinTree();	
+	~BinTree();	
 
 	//ADT
     int Size() const;//整体规模
@@ -33,13 +33,13 @@ public:
 	int RandomBinTree(BinTree<T> & bt, BinTreeNodePtr x, int h = 20);
 protected:
 	//更新节点x高度
-	int BinTree<T>::UpdateHeight(BinTreeNodePtr x);
+	int UpdateHeight(BinTreeNodePtr x);
 	//从x出发，覆盖历代祖先,更新高度
-	int BinTree<T>::UpdateAncestor(BinTreeNodePtr x);
+	void UpdateAncestor(BinTreeNodePtr x);
 
 protected:
 	int size;
-	BinTreeNodePtr
+	BinTreeNodePtr root;
 };
 
 #include "BinTreeImpl.h"

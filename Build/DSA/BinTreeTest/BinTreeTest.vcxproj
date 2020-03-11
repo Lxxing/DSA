@@ -142,6 +142,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\BinTree\BinTree.h" />
+    <ClInclude Include="..\..\..\BinTree\BinTreeImpl.h" />
+    <ClInclude Include="..\..\..\BinTree\BinTreeNode.h" />
+    <ClInclude Include="..\..\..\BinTree\BinTreeNodeImpl.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\BinTree\BinTreeTest.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

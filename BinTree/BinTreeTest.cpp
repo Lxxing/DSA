@@ -11,7 +11,7 @@ using namespace std;
 
 #include "BinTree.h"
 
-template <typename T>
+/*template <typename T>
 void Print(List<T> const &e,string predstr = "List")
 {
 	if (!predstr.empty())
@@ -24,7 +24,7 @@ void Print(List<T> const &e,string predstr = "List")
 	}
 	cout << endl;
 
-}
+}*/
 
 int main()
 {
@@ -32,8 +32,9 @@ int main()
 	BinTree<int> bintree;
 	cout <<"size:" << bintree.Size() << endl;
 	cout <<"empty:" << bintree.Empty() << endl;
-	bintree.InsertRoot(100);
-	BinTreeNodePtr root = bintree.Root();
+	int test = 100;
+	bintree.InsertRoot(test);
+	BinTreeNodeTPtr(int) root = bintree.Root();
 	cout <<"size:" << bintree.Size() << endl;
 	cout <<"empty:" << bintree.Empty() << endl;
 	cout <<"data:" << root->data << endl;

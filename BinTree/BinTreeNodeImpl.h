@@ -10,7 +10,7 @@ BinTreeNode<T>::BinTreeNode()
 }
 
 template <typename T>//初始化高度为叶子节点
-BinTreeNode<T>::BinTreeNode(const T &e,BinTreeNodePtr pare)
+BinTreeNode<T>::BinTreeNode(T e,BinTreeNodePtr pare)
 	:data(e),parent(pare),height(0),lChild(NULL),rChild(NULL)
 {
 }
