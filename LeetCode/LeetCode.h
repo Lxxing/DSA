@@ -16,6 +16,7 @@
 #include <algorithm>
 #include <sstream>
 #include <cassert>
+#include <numeric>
 using namespace std;
 
 
