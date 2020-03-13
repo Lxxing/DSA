@@ -28,6 +28,12 @@ public:
 	BinTreeNodePtr InsertLTree(BinTreeNodePtr node,BinTree<T> *&e);
 	//删除以位置node处节点为根的子树，返回该子树原先的规模
 	int Remove( BinTreeNodePtr node); 
+	BinTree<T> * Secede(BinTreeNodePtr node);//分离子树
+
+	template <typename VST> void TravLevel( VST& visit );//层次遍历 
+    template <typename VST> void TravPre( VST& visit );//先序遍历
+    template <typename VST> void TravIn( VST& visit );//中序遍历
+    template <typename VST> void TravPost( VST& visit );//后序遍历
 	//test
 	// 随机生成期望高度为h的二叉树
 	int RandomBinTree(BinTree<T> & bt, BinTreeNodePtr x, int h = 20);
@@ -36,7 +42,8 @@ protected:
 	int UpdateHeight(BinTreeNodePtr x);
 	//从x出发，覆盖历代祖先,更新高度
 	void UpdateAncestor(BinTreeNodePtr x);
-
+private:
+	int RemoveRecursive(BinTreeNodePtr node);
 protected:
 	int size;
 	BinTreeNodePtr root;

@@ -146,6 +146,7 @@
     <ClInclude Include="..\..\..\BinTree\BinTreeImpl.h" />
     <ClInclude Include="..\..\..\BinTree\BinTreeNode.h" />
     <ClInclude Include="..\..\..\BinTree\BinTreeNodeImpl.h" />
+    <ClInclude Include="..\..\..\BinTree\bintreenodetravelimpl.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\BinTree\BinTreeTest.cpp" />

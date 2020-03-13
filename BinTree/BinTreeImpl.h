@@ -59,14 +59,15 @@ BinTreeNodePtr BinTree<T>::InsertRChild(BinTreeNodePtr node,T const &e)
 	size++;
 	node->InsertRChild(e);
 	UpdateAncestor(node);
-	return node->lChild;
+	return node->rChild;
 }
 
 template <typename T>//assert(node->rChild == NULL)
 BinTreeNodePtr BinTree<T>::InsertRTree(BinTreeNodePtr node,BinTree<T> *&e)
 {
+	size += e->Size();
 	node->rChild = e->Root();
-	e->parent = node;
+	node->rChild->parent = node;
 	UpdateAncestor(node);
 	e->root = NULL;
 	e->size = 0;
@@ -82,7 +83,7 @@ BinTreeNodePtr BinTree<T>::InsertLTree(BinTreeNodePtr node,BinTree<T> *&e)
 	size += e->Size();
 	//接入
 	node->lChild = e->Root();
-	e->parent = node;
+	node->lChild->parent = node;
 	UpdateAncestor(node);
 	//清空子树元素e
 	e->root = NULL;
@@ -96,7 +97,8 @@ BinTreeNodePtr BinTree<T>::InsertLTree(BinTreeNodePtr node,BinTree<T> *&e)
 template <typename T>//去掉子树的节点，递归释放
 int BinTree<T>::Remove( BinTreeNodePtr node)
 {
-
+	FromParentTo(node) = NULL;//父节点引用置空，切除自己
+	UpdateAncestor(node->parent);
 	int n = RemoveRecursive(node);
 	size -= n;
 	delete node;
@@ -105,13 +107,26 @@ int BinTree<T>::Remove( BinTreeNodePtr node)
 template <typename T>//去掉子树的节点，递归释放
 int BinTree<T>::RemoveRecursive( BinTreeNodePtr node)
 {
-	//递归基
+	//递归基,空树
 	if (NULL == node)
 	{
 		return 0;
 	}
-	node->
 	int rnt = 1 + RemoveRecursive(node->lChild) + RemoveRecursive(node->rChild);
+	delete node;
+	return rnt;
+}
+template <typename T>
+BinTree<T> * BinTree<T>::Secede(BinTreeNodePtr node)
+{
+	FromParentTo(*node) = NULL;//父节点引用置空，切除自己
+	UpdateAncestor(node->parent);
+	BinTree<T> * rnt = new BinTree<T>();
+	rnt->root = node;
+	rnt->size = node->Size();
+	node->parent = NULL;//切断自己
+
+	this->size -= rnt->Size();
 	return rnt;
 }
 
@@ -141,6 +156,38 @@ void BinTree<T>::UpdateAncestor (BinTreeNodePtr node )
 		UpdateHeight(node); 
 		node = node->parent; 
 	}
+} 
+
+template <typename T>
+template <typename VST>
+void BinTree<T>::TravLevel ( VST& visit ) 
+{ 
+	if (root) 
+		root->TravLevel ( visit );
+} 
+
+template <typename T>
+template <typename VST>
+void BinTree<T>::TravPre( VST& visit ) 
+{ 
+	if (root) 
+		root->TravPre( visit );
+} 
+
+template <typename T>
+template <typename VST>
+void BinTree<T>::TravIn ( VST& visit ) 
+{ 
+	if (root) 
+		root->TravIn( visit );
+} 
+
+template <typename T>
+template <typename VST>
+void BinTree<T>::TravPost ( VST& visit ) 
+{ 
+	if (root) 
+		root->TravPost( visit );
 } 
 
 #endif //_BIN_TREE_IMPLEMENTATION__H_
