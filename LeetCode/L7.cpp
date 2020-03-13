@@ -7,6 +7,9 @@
 ******************************************************************************************/
 
 #include "LeetCode.h"
+/*int至少2个字节，long至少4个字节。满足sizeof(long long)>=sizeof(long) ≥ sizeof(int)≥ sizeof(short)。ILP64组织
+32系统中long四个字节，在64系统中，编译器64位的话long是8个字节
+*/
 class Solution {
 public:
     int reverse(int x) {
