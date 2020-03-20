@@ -22,7 +22,7 @@ public:
 	virtual BinTreeNodePtr Insert(const T &);
 	virtual bool Remove(const T &);
 
-}
+};
 
 
 #include "BSTImpl.h"

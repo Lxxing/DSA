@@ -76,14 +76,14 @@ void TravIn2 (BinTreeNodePtr node, VST& visit )
 template <typename T>
 BinTreeNodePtr BinTreeNode<T>::Succ()
 {
-	BinTreeNodePtr node = NULL;//记录后继的临时变量
+	BinTreeNodePtr node = this;//记录后继的临时变量,必须初始化为当前节点
 	//当前节点有右孩子，直接后继必存在于右子树，转入右子树再沿最左侧通路向左下方深入
 	if (this->rChild)
 	{
 		node = this->rChild;
 		while (HasLChild(*node))
 		{
-			node = node->rChild;//靠左最小节点
+			node = node->lChild;//靠左最小节点
 		}
 	}
 	else////直接后继若存在，必是某祖先,“将当前节点包含于其左子树中的最低祖先”
@@ -150,8 +150,9 @@ void TravIn4( BinTreeNodePtr node,VST& visit )
   			    {
   			    	return; //（在没有后继的末节点处，直接退出）
   			    }
-  		        node = node->rChild; //（直至有右分支处）转向非空的右子树
   		    }
+			node = node->rChild; //（直至有右分支处）转向非空的右子树
+
 		}
 
 	}
@@ -228,8 +229,8 @@ void TravPostR( BinTreeNodePtr node,VST& visit )
 		return;//递归基
 	}
 
-	TravPreR(node->lChild,visit);
-	TravPreR(node->rChild,visit);
+	TravPostR(node->lChild,visit);
+	TravPostR(node->rChild,visit);
 	visit(node->data);
 }
 

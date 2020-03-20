@@ -11,7 +11,7 @@ BinTree<T>::BinTree()
 template <typename T>
 BinTree<T>::~BinTree()
 {
-	if (NULL == root)
+	if (NULL != root)
 	{
 		delete root;
 	}
@@ -71,7 +71,7 @@ BinTreeNodePtr BinTree<T>::InsertRTree(BinTreeNodePtr node,BinTree<T> *&e)
 	UpdateAncestor(node);
 	e->root = NULL;
 	e->size = 0;
-	delete e;
+	//delete e;
 	e = NULL;
 
 	return node;
@@ -88,7 +88,7 @@ BinTreeNodePtr BinTree<T>::InsertLTree(BinTreeNodePtr node,BinTree<T> *&e)
 	//清空子树元素e
 	e->root = NULL;
 	e->size = 0;
-	delete e;//保留子树节点信息，子树类清理
+	//delete e;//保留子树节点信息，子树类清理
 	e = NULL;
 
 	return node;

@@ -101,6 +101,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -147,9 +148,8 @@
     <ClInclude Include="..\..\..\BinTree\BinTreeNode.h" />
     <ClInclude Include="..\..\..\BinTree\BinTreeNodeImpl.h" />
     <ClInclude Include="..\..\..\BinTree\bintreenodetravelimpl.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\BinTree\BinTreeTest.cpp" />
+    <ClInclude Include="..\..\..\BST\BST.h" />
+    <ClInclude Include="..\..\..\BST\BSTImpl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
