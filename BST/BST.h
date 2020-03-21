@@ -15,6 +15,11 @@ class BST : public BinTree<T>
 {
 protected:
 	BinTreeNodePtr hot; //“命中”节点的父亲
+	 //对node及其父亲、祖父做统一旋转调整,为了各个特例继承
+	BinTreeNodePtr RotateAt(BinTreeNodePtr node);
+	//按照“3 + 4”结构，联接3个节点及四棵子树
+	BinTreeNodePtr Connect34(BinTreeNodePtr,BinTreeNodePtr, BinTreeNodePtr,
+		BinTreeNodePtr, BinTreeNodePtr, BinTreeNodePtr, BinTreeNodePtr );
 
 public:
 

@@ -112,7 +112,94 @@ bool BST<T>::Remove(const T &e)
 	UpdateHeight(hot);
 	return true;
 }
+/**********************protected****************************/
+/******************************************************************************************
+ * BST节点旋转变换统一算法（3节点 + 4子树），返回调整之后局部子树根节点的位置
+ * 注意：尽管子树根会正确指向上层节点（如果存在），但反向的联接须由上层函数完成
+ ******************************************************************************************/
+template <typename T>
+BinTreeNodePtr BST<T>::RotateAt(BinTreeNodePtr node)
+{
+	if ( !node ) { printf ( "\a\nFail to rotate a null node\n" ); exit ( -1 ); }
+    BinTreeNodePtr p = node->parent; 
+    BinTreeNodePtr g = p->parent; 
+    //视node、p和g相对位置分四种情况
+    if ( IsLChild ( *p ) ) /* zig */
+    {
+      if ( IsLChild ( *node ) ) 
+      { /* zIg-ziIg */ 
+      	 printf("\tzig-zig: ");
+         p->parent = g->parent; //向上联接
+         return Connect34( node, p, g, node->lChild, node->rChild, p->rChild, g->rChild );
+      } 
+      else 
+      { /* zig-zag */  
+      	 printf("\tzIg-zAg: ");
+         node->parent = g->parent; //向上联接
+         return Connect34( p, node, g, p->lChild, node->lChild, node->rChild, g->rChild );
+      }
+     }
+     else  /* zag */
+     {
+      	if ( IsRChild ( *node ) ) 
+      	{ /* zag-zag */ 
+      		printf("\tzAg-zAg: ");
+         	p->parent = g->parent; //向上联接
+         	return Connect34( g, p, node, g->lChild, p->lChild, node->lChild, node->rChild );
+      	} 
+      	else
+      	{ /* zag-zig */  
+      		printf("\tzAg-zIg: ");
+         	node->parent = g->parent; //向上联接
+         	return Connect34( g, node, p, g->lChild, node->lChild, node->rChild, p->rChild );
+        }
+     }
+}
 
+
+/******************************************************************************************
+ * 按照“3 + 4”结构联接3个节点及其四棵子树，返回重组之后的局部子树根节点位置（即b）
+ * 子树根节点与上层节点之间的双向联接，均须由上层调用者完成
+ * 可用于AVL和RedBlack的局部平衡调整
+ * 按照中序顺序来理解
+ ******************************************************************************************/
+
+template <typename T>
+BinTreeNodePtr BST<T>::Connect34(BinTreeNodePtr a,BinTreeNodePtr b, BinTreeNodePtr c,
+	BinTreeNodePtr T0, BinTreeNodePtr T1, BinTreeNodePtr T2, BinTreeNodePtr T3)
+{
+	a->lChild = T0;
+	if (T0)
+	{
+		T0->parent = a;
+	}
+	a->rChild = T1;
+	if (T1)
+	{
+		T1->parent = a;
+	}
+	UpdateHeight(a);
+
+	c->lChild = T2;
+	if (T2)
+	{
+		T2->parent = c;
+	}
+	c->rChild = T3;
+	if (T3)
+	{
+		T3->parent = c;
+	}
+	UpdateHeight(c);
+
+	b->lChild = a;
+	a->parent = b;
+	b->rChild = c;
+	c->parent = b;
+	UpdateHeight(b);
+
+	return b;
+}
 
 #endif //__BINARY_SEARCH_TREEIMPL__H_
 

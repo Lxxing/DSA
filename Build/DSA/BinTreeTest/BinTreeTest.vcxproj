@@ -143,6 +143,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\AVL\AVL.h" />
+    <ClInclude Include="..\..\..\AVL\AVLImpl.h" />
     <ClInclude Include="..\..\..\BinTree\BinTree.h" />
     <ClInclude Include="..\..\..\BinTree\BinTreeImpl.h" />
     <ClInclude Include="..\..\..\BinTree\BinTreeNode.h" />
@@ -150,6 +152,9 @@
     <ClInclude Include="..\..\..\BinTree\bintreenodetravelimpl.h" />
     <ClInclude Include="..\..\..\BST\BST.h" />
     <ClInclude Include="..\..\..\BST\BSTImpl.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\AVL\AVLTest.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
