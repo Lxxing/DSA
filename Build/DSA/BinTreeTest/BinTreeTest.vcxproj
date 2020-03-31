@@ -152,9 +152,8 @@
     <ClInclude Include="..\..\..\BinTree\bintreenodetravelimpl.h" />
     <ClInclude Include="..\..\..\BST\BST.h" />
     <ClInclude Include="..\..\..\BST\BSTImpl.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\AVL\AVLTest.cpp" />
+    <ClInclude Include="..\..\..\Splay\Splay.h" />
+    <ClInclude Include="..\..\..\Splay\SplayImpl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

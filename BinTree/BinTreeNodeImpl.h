@@ -18,6 +18,11 @@ BinTreeNode<T>::BinTreeNode(T e,BinTreeNodePtr pare)
 {
 }
 
+template <typename T>
+BinTreeNode<T>::BinTreeNode(T e,BinTreeNodePtr pare,BinTreeNodePtr lc,BinTreeNodePtr rc)
+	:data(e),parent(pare),height(0),lChild(lc),rChild(rc)
+{
+}
 
 template <typename T>
 BinTreeNode<T>::~BinTreeNode()

@@ -48,6 +48,7 @@ struct BinTreeNode
 
 	BinTreeNode();
 	BinTreeNode(T e,BinTreeNodePtr pare = NULL);
+	BinTreeNode(T e,BinTreeNodePtr ,BinTreeNodePtr,BinTreeNodePtr);
 	~BinTreeNode();	
 
 	//ADT
