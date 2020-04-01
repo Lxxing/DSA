@@ -10,10 +10,10 @@
 使用两个栈更简单，一个存储最小值的栈，可能有多个值。跟随栈的数量变化
 只使用一个栈，要考虑数量变化时的最小值变化，push/pop。相当于两个栈的数据全放到一个栈中实现
 ************/
-class MinStack {
+class MinStack1{
 public:
     /** initialize your data structure here. */
-    MinStack() {
+    MinStack1() {
 		minValue = INT_MAX;
     }
     
@@ -51,6 +51,42 @@ public:
 private:
     stack<int> stackAll;
     int minValue;
+};
+class MinStack{
+public:
+    /** initialize your data structure here. */
+    MinStack() {
+    	stackMin.push(INT_MAX);
+    }
+    
+    void push(int x) {
+		if (x <= stackMin.top())
+		{
+			stackMin.push(x);
+		}
+		stackAll.push(x);
+    }
+    
+    void pop() {
+    	int num = stackAll.top();
+		stackAll.pop();//判断出栈数据是否需要改动最小值
+		if (num <= stackMin.top())
+		{
+			stackMin.pop();
+		}
+    }
+    
+    int top() {
+		return stackAll.top();
+    }
+    
+    int getMin() {
+		return stackMin.top();
+    }
+
+private:
+    stack<int> stackAll;
+    stack<int> stackMin;
 };
 
 void main()
