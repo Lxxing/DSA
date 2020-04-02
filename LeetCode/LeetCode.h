@@ -17,6 +17,8 @@
 #include <algorithm>
 #include <sstream>
 #include <cassert>
+#include <cctype>
+#include <cstdlib>
 #include <numeric>
 #include <unordered_map>
 #include <unordered_set>
