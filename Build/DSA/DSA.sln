@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BubbleSort", "BubbleSort\BubbleSort.vcxproj", "{6175B3A8-A3D0-4D5F-AF82-61F88A1CC108}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "List", "List\List.vcxproj", "{C5C83486-2B12-4AE7-82E6-1C66D8D2EFA5}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Vector", "Vector\Vector.vcxproj", "{3B58423C-CF54-4972-AFB1-0227422C5A11}"
@@ -23,14 +21,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6175B3A8-A3D0-4D5F-AF82-61F88A1CC108}.Debug|x64.ActiveCfg = Debug|x64
-		{6175B3A8-A3D0-4D5F-AF82-61F88A1CC108}.Debug|x64.Build.0 = Debug|x64
-		{6175B3A8-A3D0-4D5F-AF82-61F88A1CC108}.Debug|x86.ActiveCfg = Debug|Win32
-		{6175B3A8-A3D0-4D5F-AF82-61F88A1CC108}.Debug|x86.Build.0 = Debug|Win32
-		{6175B3A8-A3D0-4D5F-AF82-61F88A1CC108}.Release|x64.ActiveCfg = Release|x64
-		{6175B3A8-A3D0-4D5F-AF82-61F88A1CC108}.Release|x64.Build.0 = Release|x64
-		{6175B3A8-A3D0-4D5F-AF82-61F88A1CC108}.Release|x86.ActiveCfg = Release|Win32
-		{6175B3A8-A3D0-4D5F-AF82-61F88A1CC108}.Release|x86.Build.0 = Release|Win32
 		{C5C83486-2B12-4AE7-82E6-1C66D8D2EFA5}.Debug|x64.ActiveCfg = Debug|x64
 		{C5C83486-2B12-4AE7-82E6-1C66D8D2EFA5}.Debug|x64.Build.0 = Debug|x64
 		{C5C83486-2B12-4AE7-82E6-1C66D8D2EFA5}.Debug|x86.ActiveCfg = Debug|Win32
