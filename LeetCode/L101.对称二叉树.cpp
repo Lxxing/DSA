@@ -8,64 +8,61 @@
 
 class Solution {
 public:
-//[12,null,-60],[12,null,72]
-	bool isSameTree1(TreeNode* p, TreeNode* q) {
+	bool isSymmetricR(TreeNode* left,TreeNode* right)
+	{
+		if (NULL == left && NULL == right)
+		{
+			return true;
+		}
+		if (left && right && left->val == right->val)
+		{
+			return isSymmetricR(left->left,right->right) 
+				&& isSymmetricR(left->right,right->left);
+		}
+		return false;
+	}
+    bool isSymmetric(TreeNode* root) {
+		if (NULL == root)
+		{
+			return true;
+		}
+		return isSymmetricR(root->left,root->right);
+    }
+
+    bool isSymmetric1(TreeNode* root) {
+		if (NULL == root)
+		{
+			return true;
+		}
+		queue<TreeNode *> travLevel;
+		travLevel.push(root);
+		travLevel.push(root);
+		while (travLevel.size())
+		{
+			TreeNode * p = travLevel.front();
+			travLevel.pop();
+			TreeNode *q = travLevel.front();
+			travLevel.pop();
 			if (NULL == p && NULL == q)
 			{
-				return true;
+				continue;
 			}
-			
-			std::queue<TreeNode* > travP;
-			std::queue<TreeNode* > travQ;
-			travP.push(p);
-			travQ.push(q);
-			while (travP.size() && travQ.size())
+			if ( p && q && p->val == q->val )
 			{
-				p = travP.front();
-				q = travQ.front();
-				travP.pop();
-				travQ.pop();
-				if (NULL == p && NULL == q)//可能是结束也可能是叶节点，直接return漏结果
-				{
-					continue;
-				}
-				if ( p && q && p->val == q->val )
-				{
-					travP.push(p->left);
-					travP.push(p->right);
-					travQ.push(q->left);
-					travQ.push(q->right);
-				}
-				else
-				{
-					return false;
-				}
-
+				travLevel.push(p->left);
+				travLevel.push(q->right);
+				travLevel.push(p->right);
+				travLevel.push(q->left);
 			}
-			return true;
-			
-		}
+			else
+			{
+				return false;
+			}
 
-
-		
-	//[1,2] [1,null,2]
-
-    bool isSameTree(TreeNode* p, TreeNode* q) {
-		if (NULL == p && NULL == q)
-		{
-			return true;
 		}
-
-		if ( p && q && p->val == q->val )
-		{
-			return isSameTree(p->left,q->left) && isSameTree(p->right,q->right);
-		}
-		else
-		{
-			return false;
-		}
-		
+		return true;
     }
+
 };
 
 void trimLeftTrailingSpaces(string &input) {
@@ -133,15 +130,14 @@ string boolToString(bool input) {
 int main() {
     string line;
     while (getline(cin, line)) {
-        TreeNode* p = stringToTreeNode(line);
-        getline(cin, line);
-        TreeNode* q = stringToTreeNode(line);
+        TreeNode* root = stringToTreeNode(line);
         
-        bool ret = Solution().isSameTree(p, q);
+        bool ret = Solution().isSymmetric(root);
 
         string out = boolToString(ret);
         cout << out << endl;
     }
     return 0;
 }
+
 
