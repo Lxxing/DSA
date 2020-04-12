@@ -18,14 +18,16 @@ public:
 	~BTree();	
 
 	//ADT
-   int const Order();
-   int const Size();
+   int Order() const;
+   int Size() const;
    BTreeNodePtr & Root();
    bool Empty() const;
    BTreeNodePtr Search(const T& e );
    bool Insert( const T& e );
    bool Remove( const T& e );
-private:
+protected:
+	void OverFlow(BTreeNodePtr);
+	void UnderFlow(BTreeNodePtr); 
 
 protected:
 	int size;

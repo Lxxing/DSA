@@ -7,7 +7,7 @@
 #ifndef _B_TREE_NODE_H_
 #define _B_TREE_NODE_H_
 
-#include <vector.h>
+#include <vector>
 using namespace std;
 
 #define BTreeNodePtr BTreeNode<T>*   
@@ -26,12 +26,18 @@ struct BTreeNode
 		child.insert(child.begin(),NULL);
 	}	
 
-	BTreeNode(T e,BTreeNodePtr ,BTreeNodePtr,BTreeNodePtr);
-	~BTreeNode();	
+	BTreeNode(T e, BTreeNodePtr, BTreeNodePtr, BTreeNodePtr)
+	{
+
+	}
+	~BTreeNode()
+	{
+
+
+	}
 
 };
 
-#include "BinTreeNodeImpl.h"
 
 
 #endif //_B_TREE_NODE_H_

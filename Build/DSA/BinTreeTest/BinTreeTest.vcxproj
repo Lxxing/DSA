@@ -152,6 +152,9 @@
     <ClInclude Include="..\..\..\BinTree\bintreenodetravelimpl.h" />
     <ClInclude Include="..\..\..\BST\BST.h" />
     <ClInclude Include="..\..\..\BST\BSTImpl.h" />
+    <ClInclude Include="..\..\..\BTree\BTree.h" />
+    <ClInclude Include="..\..\..\BTree\BTreeImpl.h" />
+    <ClInclude Include="..\..\..\BTree\BTreeNode.h" />
     <ClInclude Include="..\..\..\Splay\Splay.h" />
     <ClInclude Include="..\..\..\Splay\SplayImpl.h" />
   </ItemGroup>
