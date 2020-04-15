@@ -8,53 +8,57 @@
 
 class Solution {
 public:
-	int Hight(TreeNode* node)
-	{
-		if (!node)
-		{
-			return 0;
-		}
+	bool hasPathSum1(TreeNode* root, int sum) {
+			if (!root)
+			{
+				return false;
+			}
+			if (!root->left && !root->right && root->val == sum)
+			{
+				return true;
+			}
+			else if(!root->left && !root->right && root->val != sum)
+			{
+				return false;
+			}
+			
+			return hasPathSum(root->left,sum - root->val) ||
+						hasPathSum(root->right,sum - root->val);
 
-		int left = Hight(node->left);
-		int right = Hight(node->right);
-		return max(left,right) + 1;
 	}
-    bool isBalanced(TreeNode* root) {
+
+    bool hasPathSum(TreeNode* root, int sum) {
 		if (!root)
 		{
-			return true;//空树平衡
-		}
-		//除了判断当前节点还递归子树是否平衡
-        return abs(Hight(root->left) - Hight(root->right)) <= 1 &&
-        		isBalanced(root->left) && 
-        		isBalanced(root->right); 
-    }
-    int isBalancedR(TreeNode* node,int & height)
-	{
-		if (!node)
-		{
-			height = -1;
-			return true;
+			return false;
 		}
 
-		int left;
-		bool isL = isBalancedR(node->left,left);
-		int right;
-		bool isR = isBalancedR(node->right,right);
-		if (isL && isR && abs(left - right) < 2)
+		stack<pair<TreeNode*, int> > stackQ;
+		stackQ.push(pair<TreeNode*, int>(root, sum));
+		TreeNode *node = root;
+		int levelSum = sum;
+
+		while (stackQ.size())
 		{
-			height = max(left,right) + 1;
-			return true;
+			node = stackQ.top().first;
+			levelSum = stackQ.top().second;
+			stackQ.pop();
+
+			if (!node->left && !node->right && node->val == levelSum)
+			{
+				return true;
+			}
+			if(node->left)
+			{
+				stackQ.push(pair<TreeNode*, int>(node->left,levelSum - node->val));
+			}
+			if(node->right)
+			{
+				stackQ.push(pair<TreeNode*, int>(node->right,levelSum - node->val));
+			}
 		}
 		return false;
-	}
-    bool isBalanced1(TreeNode* root) {
-		if (!root)
-		{
-			return true;
-		}
-		int height = 0;
-        return isBalancedR(root,height); 
+
     }
 };
 
@@ -116,6 +120,10 @@ TreeNode* stringToTreeNode(string input) {
     return root;
 }
 
+int stringToInteger(string input) {
+    return stoi(input);
+}
+
 string boolToString(bool input) {
     return input ? "True" : "False";
 }
@@ -124,8 +132,10 @@ int main() {
     string line;
     while (getline(cin, line)) {
         TreeNode* root = stringToTreeNode(line);
+        getline(cin, line);
+        int sum = stringToInteger(line);
         
-        bool ret = Solution().isBalanced(root);
+        bool ret = Solution().hasPathSum(root, sum);
 
         string out = boolToString(ret);
         cout << out << endl;
