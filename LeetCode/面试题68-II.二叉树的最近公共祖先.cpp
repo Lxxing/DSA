@@ -6,50 +6,97 @@
 ******************************************************************************************/
 #include "LeetCode.h"
 
+
 class Solution {
 public:
-	//也可层次遍历每次交换两个子树
-	TreeNode* invertTree(TreeNode* root) {
-		stack<TreeNode*> travelQ;
+	bool DFS(TreeNode* root, TreeNode* desNode,stack<TreeNode*> &travelQ)
+	{
+		if (!root)
+		{
+			return false;
+		}
 		travelQ.push(root);
-		while (travelQ.size())
+		if (root->val == desNode->val)
 		{
-			TreeNode* node= travelQ.top();
+			return true;
+		}
+
+		bool isFind = false;
+		if (!isFind && root->left)
+		{
+		    isFind = DFS(root->left,desNode,travelQ);
+		}
+		if (!isFind && root->right)
+		{
+			isFind = DFS(root->right,desNode,travelQ);
+		}
+
+		if (!isFind)
+		{
 			travelQ.pop();
-			if (!node)
+		}
+		return isFind;
+
+	}
+
+	TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+			stack<TreeNode*> travelP;
+			DFS(root,p,travelP);
+			stack<TreeNode*> travelQ;
+			DFS(root,q,travelQ);
+			int sizeP = travelP.size();
+			int sizeQ = travelQ.size();
+			int delta = abs(sizeP - sizeQ);
+			if (sizeP < sizeQ)
 			{
-				continue;
+				while (delta--)
+				{
+					travelQ.pop();
+				}
 			}
-			swap(node->left, node->right);
-			travelQ.push(node->right);
-			travelQ.push(node->left);
+			else
+			{
+				while (delta--)
+				{
+					travelP.pop();
+				}
+			}
+			while (travelP.size())
+			{
+				TreeNode*nodep = travelP.top();
+				travelP.pop();
+				TreeNode*nodeq = travelQ.top();
+				travelQ.pop();
+				if (nodep->val == nodeq->val)
+				{
+					return nodep;
+				}
+			}
+			return NULL;
+		}
+		
+
+    TreeNode* lowestCommonAncestor1(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if (!root || !p || !q)
+		{
+			return NULL;
 		}
 
-		return root;
-    }
-	TreeNode* invertTree3(TreeNode* root) {
-		if (!root)
+		if ((p->val == root->val || q->val == root->val))
 		{
 			return root;
 		}
-		swap(root->left, root->right);
 
-		invertTree(root->right);
-		invertTree(root->left);
-
-		return root;
-    }
-    TreeNode* invertTree1(TreeNode* root) {
-		if (!root)
+		TreeNode*left = lowestCommonAncestor(root->left,p,q);
+		TreeNode*right = lowestCommonAncestor(root->right,p,q);
+		if (!left)
 		{
-			return root;
+			return right;
 		}
-
-		TreeNode* rootTemp = root->left;
-		root->left = root->right;
-		root->right = rootTemp;
-		invertTree(root->left);
-		invertTree(root->right);
+		if (!right)
+		{
+			return left;
+		}
 		return root;
     }
 };
@@ -112,6 +159,10 @@ TreeNode* stringToTreeNode(string input) {
     return root;
 }
 
+int stringToInteger(string input) {
+    return stoi(input);
+}
+
 string treeNodeToString(TreeNode* root) {
     if (root == nullptr) {
       return "[]";
@@ -140,10 +191,14 @@ int main() {
     string line;
     while (getline(cin, line)) {
         TreeNode* root = stringToTreeNode(line);
+        getline(cin, line);
+        int p = stringToInteger(line);
+        getline(cin, line);
+        int q = stringToInteger(line);
         
-        TreeNode* ret = Solution().invertTree(root);
+       TreeNode* ret = Solution().lowestCommonAncestor(root, &TreeNode(p), &TreeNode(q));
 
-        string out = treeNodeToString(ret);
+        string out = to_string(ret->val);
         cout << out << endl;
     }
     return 0;

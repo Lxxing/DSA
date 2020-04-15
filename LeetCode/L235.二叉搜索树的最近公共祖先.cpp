@@ -8,48 +8,39 @@
 
 class Solution {
 public:
-	//也可层次遍历每次交换两个子树
-	TreeNode* invertTree(TreeNode* root) {
-		stack<TreeNode*> travelQ;
-		travelQ.push(root);
-		while (travelQ.size())
+    TreeNode* lowestCommonAncestor1(TreeNode* root, TreeNode* p, TreeNode* q) {
+		if (!root || !p || !q)
 		{
-			TreeNode* node= travelQ.top();
-			travelQ.pop();
-			if (!node)
+			return root;
+		}
+
+		if ((p->val < root->val && q->val < root->val))
+		{
+			return lowestCommonAncestor(root->left,p,q);
+		}
+		if ((p->val > root->val && q->val > root->val))
+		{
+			return lowestCommonAncestor(root->right,p,q);
+		}
+		return root;
+    } 
+
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+		while (root)
+		{
+			if ((p->val < root->val && q->val < root->val))
 			{
-				continue;
+				root = root->left;
 			}
-			swap(node->left, node->right);
-			travelQ.push(node->right);
-			travelQ.push(node->left);
+			else if ((p->val > root->val && q->val > root->val))//必须加else，不然上面的运行结果会导致下面结果的判断
+			{
+				root = root->right;
+			}
+			else
+			{
+				return root;
+			}
 		}
-
-		return root;
-    }
-	TreeNode* invertTree3(TreeNode* root) {
-		if (!root)
-		{
-			return root;
-		}
-		swap(root->left, root->right);
-
-		invertTree(root->right);
-		invertTree(root->left);
-
-		return root;
-    }
-    TreeNode* invertTree1(TreeNode* root) {
-		if (!root)
-		{
-			return root;
-		}
-
-		TreeNode* rootTemp = root->left;
-		root->left = root->right;
-		root->right = rootTemp;
-		invertTree(root->left);
-		invertTree(root->right);
 		return root;
     }
 };
@@ -112,6 +103,10 @@ TreeNode* stringToTreeNode(string input) {
     return root;
 }
 
+int stringToInteger(string input) {
+    return stoi(input);
+}
+
 string treeNodeToString(TreeNode* root) {
     if (root == nullptr) {
       return "[]";
@@ -140,10 +135,14 @@ int main() {
     string line;
     while (getline(cin, line)) {
         TreeNode* root = stringToTreeNode(line);
+        getline(cin, line);
+        int p = stringToInteger(line);
+        getline(cin, line);
+        int q = stringToInteger(line);
         
-        TreeNode* ret = Solution().invertTree(root);
+        TreeNode* ret = Solution().lowestCommonAncestor(root, &TreeNode(p), &TreeNode(q));
 
-        string out = treeNodeToString(ret);
+        string out = to_string(ret->val);
         cout << out << endl;
     }
     return 0;
