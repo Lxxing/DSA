@@ -37,6 +37,14 @@
 #define FromParentTo(node) \
 	(IsRoot(node) ? root : (IsLChild(node) ? (node).parent->lChild : (node).parent->rChild))
 
+
+
+//节点颜色
+typedef enum { 
+	RB_RED, 
+	RB_BLACK
+} RBColor;
+
 template <typename T>
 struct BinTreeNode
 {
@@ -45,6 +53,7 @@ struct BinTreeNode
 	BinTreeNodePtr lChild;
 	BinTreeNodePtr rChild;
 	int height;//高度
+	RBColor color;
 
 	BinTreeNode();
 	BinTreeNode(T e,BinTreeNodePtr pare = NULL);
